@@ -1,0 +1,44 @@
+### uVision2 Project, (C) Keil Software
+### Do not modify !
+
+ cExt (*.c)
+ aExt (*.s*; *.src; *.a*)
+ oExt (*.obj; *.o)
+ lExt (*.lib)
+ tExt (*.txt; *.h; *.inc)
+ pExt (*.plm)
+ CppX (*.cpp)
+ DaveTm { 0,0,0,0,0,0,0,0 }
+
+Target (Lab2), 0x0004 // Tools: 'ARM-ADS'
+GRPOPT 1,(Source),1,0,0
+
+OPTFFF 1,1,1,251658240,0,30,35,0,<.\main.c><main.c> 
+OPTFFF 1,2,2,0,0,0,0,0,<.\startup.s><startup.s> 
+
+
+TARGOPT 1, (Lab2)
+ ADSCLK=16000000
+  OPTTT 1,1,1,0
+  OPTHX 1,65535,0,0,0
+  OPTLX 79,66,8,<.\Listings\>
+  OPTOX 16
+  OPTLT 1,1,1,0,1,1,0,1,0,0,0,0
+  OPTXL 1,1,1,1,1,1,1,0,0
+  OPTFL 1,0,1
+  OPTAX 255
+  OPTBL 0,(Data Sheet)<DATASHTS\TI\TM4C123\TM4C1231C3PM.pdf>
+  OPTBL 1,(Technical Reference Manual)<datashts\arm\cortex_m4\r0p1\DDI0439C_CORTEX_M4_R0P1_TRM.PDF>
+  OPTBL 2,(Generic User Guide)<datashts\arm\cortex_m4\r0p1\DUI0553A_CORTEX_M4_DGUG.PDF>
+  OPTDL (SARMCM3.DLL)(-MPU)(DCM.DLL)(-pCM4 -dLaunchPadDLL)(SARMCM3.DLL)(-MPU)(TCM.DLL)(-pCM4)
+  OPTDBG 3981309,0,()()()()()()()()()() (BIN\UL2CM3.DLL)()()()
+  OPTKEY 0,(UL2CM3)(UL2CM3(-O207 -S0 -C0 -FO7  -FN1 -FC800 -FD20000000 -FF0TM4C123_32 -FL08000 -FS00)
+  OPTKEY 0,(ARMRTXEVENTFLAGS)(-L70 -Z18 -C0 -M0 -T1)
+  OPTKEY 0,(DLGDARM)((1010=-1,-1,-1,-1,0)(1007=-1,-1,-1,-1,0)(1008=-1,-1,-1,-1,0)(1009=-1,-1,-1,-1,0)(1012=-1,-1,-1,-1,0))
+  OPTKEY 0,(ARMDBGFLAGS)(-T0)
+  OPTMM 1,0,(0x400253FC)
+  OPTDF 0x100008E
+  OPTLE <>
+  OPTLC <>
+EndOpt
+
