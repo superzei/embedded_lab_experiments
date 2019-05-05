@@ -151,8 +151,9 @@ void ATcommand(char* command)
 	}
 	UART_OutChar('\r'); // Carriage return
 	UART_OutChar('\n'); // Run command
-	
-	delay(100);
+
+	readOutput("OK", timeout);
+	delay(1000);
 }
 
 
@@ -164,7 +165,6 @@ void readOutput(char* searchFor, unsigned long tm)
 	unsigned long current = milliseconds;
 	while (milliseconds - current < tm)	// keep reading, until timeout
 	{
-		
 		while(!(UART1_FR_R&UART_FR_RXFE))	// while we have chars to read
 			{
 				a = UART_InChar();	// read a char from UART1
@@ -226,10 +226,9 @@ void respond()
 	snprintf(command, 30, "AT+CIPSEND=%d", strlen(response) * sizeof(char));	// we are sending data, catch
 	ATcommand(command);
 	// readOutput("OK");
-	delay(100);
 	
 	ATcommand(response);	// send the data
-	readOutput("OK", 5000);
+	// readOutput("OK", 5000);
 	
 	/*if (SearchIndexOf(received, ">") != -1)	// received signal, awaiting data
 	{
@@ -243,22 +242,22 @@ int main()
 	EnableInterrupts();
 	
 	ATcommand("AT+CWQAP"); // disconnect
-	readOutput("OK", 5000);
+	// readOutput("OK", 5000);
 	
 	ATcommand("AT+CWMODE=3");
-	readOutput("OK", 5000);
+	// readOutput("OK", 5000);
 	
 	ATcommand("AT+CIPSTATUS");
-	readOutput("OK", 5000);
+	// readOutput("OK", 5000);
 	
 	ATcommand("AT+CWJAP=\"TurkTelekom_TA65B\",\"NavaxmGc\"");	// connect
-	readOutput("OK", 10000);
+	// readOutput("OK", 10000);
 
 	ATcommand("AT+CIPMUX=1");	// set multi connection mode
-	readOutput("OK", 5000);
+	// readOutput("OK", 5000);
 	
 	ATcommand("AT+CIPSERVER=1,80");	// start webserver at port 80
-	readOutput("OK", 5000);
+	// readOutput("OK", 5000);
 	
 	/* SUPERLOOP */
 	while(1)

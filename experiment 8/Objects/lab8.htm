@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\lab8.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\lab8.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon May 06 02:03:00 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon May 06 02:13:57 2019
 <BR><P>
 <H3>Maximum Stack Usage =       1160 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -14,7 +14,7 @@ Functions with no stack information
 </H3><UL>
  <LI><a href="#[81]">Reset_Handler</a>
  <LI><a href="#[d2]">DisableInterrupts</a>
- <LI><a href="#[a6]">EnableInterrupts</a>
+ <LI><a href="#[a7]">EnableInterrupts</a>
  <LI><a href="#[d3]">StartCritical</a>
  <LI><a href="#[d4]">EndCritical</a>
  <LI><a href="#[d5]">WaitForInterrupt</a>
@@ -725,7 +725,7 @@ Global Symbols
 
 <P><STRONG><a name="[d2]"></a>DisableInterrupts</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
 
-<P><STRONG><a name="[a6]"></a>EnableInterrupts</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text))
+<P><STRONG><a name="[a7]"></a>EnableInterrupts</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -785,7 +785,7 @@ Global Symbols
 <P><STRONG><a name="[d8]"></a>_memcpy_lastbytes_aligned</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memcpy_w.o(.text), UNUSED)
 
 <P><STRONG><a name="[aa]"></a>__aeabi_memclr</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readOutput
+<BR><BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readOutput
 </UL>
 
 <P><STRONG><a name="[9a]"></a>__rt_memclr</STRONG> (Thumb, 68 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
@@ -867,97 +867,97 @@ Global Symbols
 
 <P><STRONG><a name="[e3]"></a>__use_no_semihosting_swi</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[9f]"></a>ATcommand</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, main.o(i.ATcommand))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ATcommand
+<P><STRONG><a name="[e4]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
+
+<P><STRONG><a name="[9f]"></a>ATcommand</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, main.o(i.ATcommand))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = ATcommand &rArr; readOutput &rArr; SearchIndexOf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
+<BR>[Calls]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readOutput
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_OutChar
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;respond
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[e4]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, indicate_semi.o(.text), UNUSED)
-
-<P><STRONG><a name="[a4]"></a>InitUART</STRONG> (Thumb, 120 bytes, Stack size 0 bytes, main.o(i.InitUART))
-<BR><BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
+<P><STRONG><a name="[a5]"></a>InitUART</STRONG> (Thumb, 120 bytes, Stack size 0 bytes, main.o(i.InitUART))
+<BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
 </UL>
 
-<P><STRONG><a name="[a3]"></a>PLL_Init</STRONG> (Thumb, 108 bytes, Stack size 0 bytes, main.o(i.PLL_Init))
-<BR><BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
+<P><STRONG><a name="[a4]"></a>PLL_Init</STRONG> (Thumb, 108 bytes, Stack size 0 bytes, main.o(i.PLL_Init))
+<BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
 </UL>
 
 <P><STRONG><a name="[a8]"></a>SearchIndexOf</STRONG> (Thumb, 98 bytes, Stack size 16 bytes, main.o(i.SearchIndexOf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = SearchIndexOf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readOutput
+<BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readOutput
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[c]"></a>SysTick_Handler</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, main.o(i.SysTick_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
-<P><STRONG><a name="[a5]"></a>SystickInit</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, main.o(i.SystickInit))
-<BR><BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
+<P><STRONG><a name="[a6]"></a>SystickInit</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, main.o(i.SystickInit))
+<BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
 </UL>
 
 <P><STRONG><a name="[ab]"></a>UART_InChar</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, main.o(i.UART_InChar))
-<BR><BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readOutput
+<BR><BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readOutput
 </UL>
 
 <P><STRONG><a name="[a0]"></a>UART_OutChar</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, main.o(i.UART_OutChar))
 <BR><BR>[Called By]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATcommand
 </UL>
 
-<P><STRONG><a name="[a1]"></a>delay</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, main.o(i.delay))
+<P><STRONG><a name="[a2]"></a>delay</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, main.o(i.delay))
 <BR><BR>[Called By]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;respond
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATcommand
 </UL>
 
-<P><STRONG><a name="[a2]"></a>init</STRONG> (Thumb, 16 bytes, Stack size 4 bytes, main.o(i.init))
+<P><STRONG><a name="[a3]"></a>init</STRONG> (Thumb, 16 bytes, Stack size 4 bytes, main.o(i.init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystickInit
-<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PLL_Init
-<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitUART
+<BR>[Calls]<UL><LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystickInit
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PLL_Init
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitUART
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[8e]"></a>main</STRONG> (Thumb, 144 bytes, Stack size 0 bytes, main.o(i.main))
+<P><STRONG><a name="[8e]"></a>main</STRONG> (Thumb, 84 bytes, Stack size 0 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1160 + Unknown Stack Size
 <LI>Call Chain = main &rArr; respond &rArr; __2snprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EnableInterrupts
+<BR>[Calls]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EnableInterrupts
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;respond
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readOutput
-<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readOutput
+<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SearchIndexOf
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATcommand
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[a7]"></a>readOutput</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, main.o(i.readOutput))
+<P><STRONG><a name="[a1]"></a>readOutput</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, main.o(i.readOutput))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = readOutput &rArr; SearchIndexOf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_InChar
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SearchIndexOf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;respond
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATcommand
 </UL>
 
-<P><STRONG><a name="[a9]"></a>respond</STRONG> (Thumb, 72 bytes, Stack size 1040 bytes, main.o(i.respond))
+<P><STRONG><a name="[a9]"></a>respond</STRONG> (Thumb, 62 bytes, Stack size 1040 bytes, main.o(i.respond))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1160 + Unknown Stack Size
 <LI>Call Chain = respond &rArr; __2snprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2snprintf
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readOutput
-<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATcommand
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
