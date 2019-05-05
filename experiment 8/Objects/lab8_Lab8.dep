@@ -1,0 +1,6 @@
+Dependencies for Project 'lab8', Target 'Lab8': (DO NOT MODIFY !)
+F (.\main.c)(0x5CCF6B9F)(--c99 --gnu -c --cpu Cortex-M4 -D__RTX -D__EVAL -g -O0 --apcs=interwork --split_sections-IC:\Keil_v5\ARM\RV31\Inc-I.\RTE\_Lab8-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="526" -DTM4C123GH6PM-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (tm4c123ge6pm.h)(0x5CCDC7EC)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x599F218C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x599F218C)
+F (.\startup.s)(0x5C9CDD84)(--cpu Cortex-M4 --pd "__RTX SETA 1" --pd "__EVAL SETA 1" -g --apcs=interwork -IC:\Keil_v5\ARM\RV31\Inc-I.\RTE\_Lab8-IC:\Keil_v5\ARM\PACK\Keil\TM4C_DFP\1.1.0\Device\Include\TM4C123-IC:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 526" --pd "TM4C123GH6PM SETA 1"--list .\listings\startup.lst --xref -o .\objects\startup.o --depend .\objects\startup.d)
