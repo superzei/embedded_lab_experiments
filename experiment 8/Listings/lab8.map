@@ -32,7 +32,9 @@ Section Cross References
     main.o(i.respond) refers to strlen.o(.text) for strlen
     main.o(i.respond) refers to noretval__2snprintf.o(.text) for __2snprintf
     main.o(i.respond) refers to main.o(i.ATcommand) for ATcommand
+    main.o(i.respond) refers to main.o(i.SearchIndexOf) for SearchIndexOf
     main.o(i.respond) refers to main.o(.constdata) for .constdata
+    main.o(i.respond) refers to main.o(.bss) for received
     startup.o(STACK) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
@@ -341,7 +343,7 @@ Image Symbol Table
     i.main                                   0x0000094c   Section        0  main.o(i.main)
     i.readOutput                             0x00000a24   Section        0  main.o(i.readOutput)
     i.respond                                0x00000a8c   Section        0  main.o(i.respond)
-    .constdata                               0x00000ad8   Section     1004  main.o(.constdata)
+    .constdata                               0x00000b04   Section     1004  main.o(.constdata)
     .data                                    0x20000000   Section        4  main.o(.data)
     .bss                                     0x20000004   Section      512  main.o(.bss)
     received                                 0x20000004   Data         512  main.o(.bss)
@@ -611,12 +613,12 @@ Image Symbol Table
     UART_OutChar                             0x0000090d   Thumb Code    20  main.o(i.UART_OutChar)
     delay                                    0x00000925   Thumb Code    18  main.o(i.delay)
     init                                     0x0000093d   Thumb Code    16  main.o(i.init)
-    main                                     0x0000094d   Thumb Code    84  main.o(i.main)
+    main                                     0x0000094d   Thumb Code    80  main.o(i.main)
     readOutput                               0x00000a25   Thumb Code    88  main.o(i.readOutput)
-    respond                                  0x00000a8d   Thumb Code    56  main.o(i.respond)
-    timeout                                  0x00000ad8   Data           4  main.o(.constdata)
-    Region$$Table$$Base                      0x00000ec4   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00000ee4   Number         0  anon$$obj.o(Region$$Table)
+    respond                                  0x00000a8d   Thumb Code    74  main.o(i.respond)
+    timeout                                  0x00000b04   Data           4  main.o(.constdata)
+    Region$$Table$$Base                      0x00000ef0   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00000f10   Number         0  anon$$obj.o(Region$$Table)
     milliseconds                             0x20000000   Data           4  main.o(.data)
     __libspace_start                         0x20000204   Data          96  libspace.o(.bss)
     __temporary_stack_top$libspace           0x20000264   Data           0  libspace.o(.bss)
@@ -629,9 +631,9 @@ Memory Map of the image
 
   Image Entry point : 0x0000026d
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x00000ee8, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00000000, Size: 0x00000f14, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000ee4, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000f10, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -719,25 +721,25 @@ Memory Map of the image
     0x0000093c   0x0000093c   0x00000010   Code   RO           11    i.init              main.o
     0x0000094c   0x0000094c   0x000000d8   Code   RO           12    i.main              main.o
     0x00000a24   0x00000a24   0x00000068   Code   RO           13    i.readOutput        main.o
-    0x00000a8c   0x00000a8c   0x0000004c   Code   RO           14    i.respond           main.o
-    0x00000ad8   0x00000ad8   0x000003ec   Data   RO           16    .constdata          main.o
-    0x00000ec4   0x00000ec4   0x00000020   Data   RO          326    Region$$Table       anon$$obj.o
+    0x00000a8c   0x00000a8c   0x00000078   Code   RO           14    i.respond           main.o
+    0x00000b04   0x00000b04   0x000003ec   Data   RO           16    .constdata          main.o
+    0x00000ef0   0x00000ef0   0x00000020   Data   RO          326    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00000ee4, Size: 0x00000004, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00000f10, Size: 0x00000004, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x00000ee4   0x00000004   Data   RW           17    .data               main.o
+    0x20000000   0x00000f10   0x00000004   Data   RW           17    .data               main.o
 
 
-    Execution Region ER_ZI (Exec base: 0x20000004, Load base: 0x00000ee8, Size: 0x00000664, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000004, Load base: 0x00000f14, Size: 0x00000664, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20000004        -       0x00000200   Zero   RW           15    .bss                main.o
     0x20000204        -       0x00000060   Zero   RW          200    .bss                c_w.l(libspace.o)
-    0x20000264   0x00000ee8   0x00000004   PAD
+    0x20000264   0x00000f14   0x00000004   PAD
     0x20000268        -       0x00000000   Zero   RW          109    HEAP                startup.o
     0x20000268        -       0x00000400   Zero   RW          108    STACK               startup.o
 
@@ -749,11 +751,11 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       958        226       1004          4        512       8575   main.o
+      1002        256       1004          4        512       8579   main.o
        692        632          0          0       1024       1004   startup.o
 
     ----------------------------------------------------------------------
-      1652        858       1036          4       1536       9579   Object Totals
+      1696        888       1036          4       1536       9583   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          2          0          0          0          0          0   (incl. Padding)
 
@@ -816,15 +818,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      2776        900       1036          4       1636       9795   Grand Totals
-      2776        900       1036          4       1636       9795   ELF Image Totals
-      2776        900       1036          4          0          0   ROM Totals
+      2820        930       1036          4       1636       9799   Grand Totals
+      2820        930       1036          4       1636       9799   ELF Image Totals
+      2820        930       1036          4          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 3812 (   3.72kB)
+    Total RO  Size (Code + RO Data)                 3856 (   3.77kB)
     Total RW  Size (RW Data + ZI Data)              1640 (   1.60kB)
-    Total ROM Size (Code + RO Data + RW Data)       3816 (   3.73kB)
+    Total ROM Size (Code + RO Data + RW Data)       3860 (   3.77kB)
 
 ==============================================================================
 

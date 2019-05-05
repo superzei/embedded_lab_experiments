@@ -13,7 +13,7 @@ extern void WaitForInterrupt(void);
 
 /****************VARS********************/
 
-const unsigned int timeout = 5000; // timeout for read operations
+const unsigned int timeout = 10000; // timeout for read operations
 static char received[512];
 unsigned long milliseconds = 0;
 
@@ -153,7 +153,7 @@ void ATcommand(char* command)
 	UART_OutChar('\n'); // Run command
 
 	readOutput("OK", timeout);
-	delay(1000);
+	delay(500);
 }
 
 
@@ -220,16 +220,19 @@ int SearchIndexOf(char src[], char str[])
 
 void respond()
 {
-	char response[1000] = "<html> <head> <h1>Merhaba Dunya</h1> </head> </html>";	// MAX 2048 bytes can be send
+	char response[1000] = "<html> <head> </head> <h1>Merhaba Dunya</h1> </html>";	// MAX 2048 bytes can be send
 	char command[30];
+
 	
 	snprintf(command, 30, "AT+CIPSEND=0,%d", strlen(response) * sizeof(char));	// we are sending data, catch
 	ATcommand(command);
-	
 	if (SearchIndexOf(received, "OK") != -1)	// received signal
 	{
 		ATcommand(response);	// send the data
 	}
+	
+	ATcommand("AT+CIPCLOSE=0");	// close connection
+	
 }
 
 int main()
@@ -237,34 +240,21 @@ int main()
 	init();
 	EnableInterrupts();
 	
+	ATcommand("AT+RST"); // reset
 	ATcommand("AT+CWQAP"); // disconnect
-	// readOutput("OK", 5000);
-	
 	ATcommand("AT+CWMODE=3");
-	// readOutput("OK", 5000);
-	
 	ATcommand("AT+CIPSTATUS");
-	// readOutput("OK", 5000);
-	
 	ATcommand("AT+CWJAP=\"TurkTelekom_TA65B\",\"NavaxmGc\"");	// connect
-	// readOutput("OK", 10000);
-
 	ATcommand("AT+CIPMUX=1");	// set multi connection mode
-	// readOutput("OK", 5000);
-	
 	ATcommand("AT+CIPSERVER=1,80");	// start webserver at port 80
-	// readOutput("OK", 5000);
 	
 	/* SUPERLOOP */
 	while(1)
 	{
-		if ((UART1_FR_R & UART_FR_RXFE) != 0) // if received UART data
+		readOutput("OK", 2000);
+		if (SearchIndexOf(received, "+IPD") != -1) // if received data is a TCP message
 		{
-			readOutput("OK", 1000);
-			if (SearchIndexOf(received, "+IPD") != -1) // if received data is a TCP message
-			{
-				respond();
-			}
+			respond();
 		}
 	}
 	

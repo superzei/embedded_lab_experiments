@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\lab8.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\lab8.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon May 06 02:27:44 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon May 06 02:55:18 2019
 <BR><P>
 <H3>Maximum Stack Usage =       1160 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -891,7 +891,8 @@ Global Symbols
 <P><STRONG><a name="[a8]"></a>SearchIndexOf</STRONG> (Thumb, 98 bytes, Stack size 16 bytes, main.o(i.SearchIndexOf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = SearchIndexOf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readOutput
+<BR>[Called By]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;respond
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readOutput
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -924,7 +925,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[8e]"></a>main</STRONG> (Thumb, 84 bytes, Stack size 0 bytes, main.o(i.main))
+<P><STRONG><a name="[8e]"></a>main</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1160 + Unknown Stack Size
 <LI>Call Chain = main &rArr; respond &rArr; __2snprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -949,13 +950,14 @@ Global Symbols
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATcommand
 </UL>
 
-<P><STRONG><a name="[a9]"></a>respond</STRONG> (Thumb, 56 bytes, Stack size 1040 bytes, main.o(i.respond))
+<P><STRONG><a name="[a9]"></a>respond</STRONG> (Thumb, 74 bytes, Stack size 1040 bytes, main.o(i.respond))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1160 + Unknown Stack Size
 <LI>Call Chain = respond &rArr; __2snprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2snprintf
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SearchIndexOf
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ATcommand
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
