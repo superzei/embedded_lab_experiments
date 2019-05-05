@@ -223,17 +223,13 @@ void respond()
 	char response[1000] = "<html> <head> <h1>Merhaba Dunya</h1> </head> </html>";	// MAX 2048 bytes can be send
 	char command[30];
 	
-	snprintf(command, 30, "AT+CIPSEND=%d", strlen(response) * sizeof(char));	// we are sending data, catch
+	snprintf(command, 30, "AT+CIPSEND=0,%d", strlen(response) * sizeof(char));	// we are sending data, catch
 	ATcommand(command);
-	// readOutput("OK");
 	
-	ATcommand(response);	// send the data
-	// readOutput("OK", 5000);
-	
-	/*if (SearchIndexOf(received, ">") != -1)	// received signal, awaiting data
+	if (SearchIndexOf(received, "OK") != -1)	// received signal
 	{
-
-	}*/
+		ATcommand(response);	// send the data
+	}
 }
 
 int main()
