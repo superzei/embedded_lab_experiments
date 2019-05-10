@@ -1,5 +1,6 @@
 #include "SysTick.h"
 #include "tm4c123ge6pm.h"
+#include "PWM.h"
 
 unsigned long milliseconds;
 

@@ -35,7 +35,7 @@ void InitUART(void)
 	UART1_IFLS_R &= ~0x3F;                            // Clear TX and RX interrupt FIFO level fields
   UART1_IFLS_R += UART_IFLS_RX1_8 ;                 // RX FIFO interrupt threshold >= 1/8th full
   UART1_IM_R  |= UART_IM_RXIM | UART_IM_RTIM;       // Enable interupt on RX and RX transmission end
-	enableInterrupts();
+	// enableInterrupts();
 }
 
 /*

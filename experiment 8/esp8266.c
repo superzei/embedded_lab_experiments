@@ -13,26 +13,32 @@ char received[512];
 
 /*
 	Serial handler 
+	
+	TRIED AND FAILED
+	NO INTERRUPTS AGAIN
+	HNNNNNGGGG....
 */
-void UART1_Handler(void){
+/*void UART1_Handler(void){
 	if(UART1_RIS_R & UART_RIS_RXRIS){   // rx fifo >= 1/8 full
 		UART1_ICR_R = UART_ICR_RXIC;      // acknowledge interrupt
 		readOutput(received, "OK", timeout);				// read output, write to a buffer
+				
 		if (SearchIndexOf(received, "+IPD") != -1)	// starts with +IPD, it is a TCP request
 		{
 			respond();
 		}
 	}
+	
 	if(UART1_RIS_R & UART_RIS_RTRIS){   // receiver timed out
 		UART1_ICR_R = UART_ICR_RTIC;      // acknowledge receiver time
 	}
-}
+}*/
 
 /*
 	Send an AT command via UART
 	Idea shamelessly stolen from online example
 */
-void ATcommand(char* command, int d)
+int ATcommand(char* command, int tm, char* searchFor)
 {
 	// memset(received, 0, sizeof(received));	// clear the buffer
 	while (*command != '\0')	// We do not want to end string with 0, we want to end it with newline
@@ -41,6 +47,8 @@ void ATcommand(char* command, int d)
 	}
 	UART_OutChar('\r'); // Carriage return
 	UART_OutChar('\n'); // Run command
+	
+	return readOutput(received, searchFor, tm);
 }
 
 /*
@@ -48,12 +56,12 @@ void ATcommand(char* command, int d)
 		SearchFor: string to search for in text that will stop the search
 		tm: timeout in milliseconds 
 */
-void readOutput(char* buffer, char* searchFor, unsigned long tm)
+int readOutput(char* buffer, char* searchFor, unsigned long tm)
 {
 	int i = 0;
 	char a;
-	memset(buffer, 0, sizeof(&buffer));	// clear the buffer
 	unsigned long current = millis();
+	memset(buffer, 0, BUFFER_SIZE);	// clear the buffer
 	while (millis() - current < tm)	// keep reading, until timeout
 	{
 		while(!(UART1_FR_R&UART_FR_RXFE))	// while we have chars to read
@@ -63,12 +71,13 @@ void readOutput(char* buffer, char* searchFor, unsigned long tm)
 				received[i]= a;
 				i++;
 			}
-		if (SearchIndexOf(received, searchFor) != -1)	//When OK reply sent, do not wait for timeout, get out
+		if (SearchIndexOf(buffer, searchFor) != -1)	//When OK reply sent, do not wait for timeout, get out
 		{
-			break;
+			return 1;	// found it, exit
 		}
 		
 	}
+	return 0;	// timeout
 }
 
 /*
@@ -119,11 +128,13 @@ Request parse_request(char* string_to_parse)
 	*/
 	
 	token = strtok(token, ",");
-	int id = strtol(token, NULL, 10);
+	char* id = malloc(strlen(token));
+	strcpy(id, token);
 	
 	token = strtok(NULL, ",");
 	token = strtok(token, ":");
-	int length = strtol(token, NULL, 10);
+	char* length = malloc(strlen(token));
+	strcpy(length, token);
 	
 	token = strtok(NULL, ":");
 	token = strtok(token, " ");
@@ -153,6 +164,8 @@ void free_request(Request request)
 {
 	free(request.data);
 	free(request.type);
+	free(request.length);
+	free(request.id);
 }
 
 
@@ -168,40 +181,48 @@ void respond(void)
 	if (strcmp(request.type, "GET") == 0)
 	{
 
-		sprintf(response, "<html><head> <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\"> </link></head><body> <div class=\"container\"> <h1>Hello WORLD</h1> <h5>%d</h5> <h5>%d</h5> <h5>%s</h5> <h5 id=\"r\"></h5> <button type=\"button\" id=\"t\" class=\"btn btn-primary\">POST</button> <script src=\"https://code.jquery.com/jquery-3.4.1.min.js\"> </script> <script>$(\"#t\").click(function (e){$.post(\"192.168.1.105:80\",{new_data: 5}, function(data){$(\"#h5\").html(data);})})</script> </div></body></html>",
+		sprintf(response, "<html><head> <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\"> </link></head><body> <div class=\"container\"> <h1>Hello WORLD</h1> <h5>%s</h5> <h5>%s</h5> <h5>%s</h5> <h5 id=\"r\"></h5> <button type=\"button\" id=\"t\" class=\"btn btn-primary\">POST</button> <script src=\"https://code.jquery.com/jquery-3.4.1.min.js\"> </script> <script>$(\"#t\").click(function (e){$.post(\"192.168.1.105:80\",{new_data: 5}, function(data){$(\"#h5\").html(data);})})</script> </div></body></html>",
 		request.id, request.length, request.type);
 
 		snprintf(command, 30, "AT+CIPSEND=0,%d", strlen(response) * sizeof(char));	// we are sending data, catch
-		ATcommand(command, 100);
-		if (SearchIndexOf(received, "OK") != -1)	// received signal
+		if (ATcommand(command, 2000, "OK"))	// received signal
 		{
-			ATcommand(response, 100);	// send the data
+			ATcommand(response, 2000, "OK");	// send the data
 		}
 		
-		ATcommand("AT+CIPCLOSE=0", 100);	// close connection
+		ATcommand("AT+CIPCLOSE=0", 500, "OK");	// close connection
 	}
 	else if (strcmp(request.type, "POST") == 0)
 	{
 		sprintf(response, "OK");
 		snprintf(command, 30, "AT+CIPSEND=0,%d", strlen(response) * sizeof(char));	// we are sending data, catch
-		ATcommand(command, 100);
+		ATcommand(command, 2000, "OK");
 		if (SearchIndexOf(received, "OK") != -1)	// received signal
 		{
-			ATcommand(response, 100);	// send the data
+			ATcommand(response, 500, "OK");	// send the data
 		}
 	}
 	
 	free_request(request);
 }
 
-void initialize_server(void)
+int send_get_request(char* IP, int port)
 {
+		char txbuffer[50];
+		char command[30];
+		int timeout = 5;
+		sprintf((char*)txbuffer, "AT+CIPSTART=\"TCP\",\"%s\",%d", IP, port);
 		
-	ATcommand("AT+RST", 500); // reset
-	ATcommand("AT+CWQAP", 500); // disconnect
-	ATcommand("AT+CWMODE=3", 500);	// set mode to station + soft ap
-	ATcommand("AT+CIPSTATUS", 500);	// status report??
-	ATcommand("AT+CWJAP=\"TurkTelekom_TA65B\",\"NavaxmGc\"", 250);	// connect
-	ATcommand("AT+CIPMUX=1", 300);	// set multi connection mode
-	ATcommand("AT+CIPSERVER=1,80", 300);	// start webserver at port 80
+		if (ATcommand(txbuffer, 2000, "OK")) // open tcp connection to a server
+		{
+			sprintf(txbuffer, "GET /raw HTTP/1.1\r\nHost:%s\r\n\r\n", IP);
+
+			snprintf(command, 30, "AT+CIPSEND=%d", strlen(txbuffer) * sizeof(char));	// we are sending data, catch
+	
+			ATcommand(command, 1000, "OK");
+			delay(50);
+			ATcommand(txbuffer, 10000, "CLOSED");
+			return 1;
+		}
+		return 0;
 }
