@@ -27,25 +27,23 @@ Project File Date:  05/09/2019
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Rebuild target 'Lab8'
-assembling startup.s...
 compiling PWM.c...
-compiling SysTick.c...
+assembling startup.s...
 compiling UART.c...
+compiling SysTick.c...
 compiling esp8266.c...
 esp8266.c(213): warning:  #177-D: variable "timeout"  was declared but never referenced
   		int timeout = 5;
 esp8266.c: 1 warning, 0 errors
 compiling main.c...
-main.c(157): warning:  #550-D: variable "value"  was set but never used
-  					int value;
-main.c(161): warning:  #177-D: variable "vv"  was declared but never referenced
-  					int vv;
 main.c(166): warning:  #111-D: statement is unreachable
-  		delay(100);
-main.c: 3 warnings, 0 errors
+  		delay(50);
+main.c(149): warning:  #177-D: variable "raw_val"  was declared but never referenced
+  	char *raw_val;
+main.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=4112 RO-data=352 RW-data=8 ZI-data=2656  
-".\Objects\lab8.axf" - 0 Error(s), 4 Warning(s).
+Program Size: Code=3944 RO-data=352 RW-data=4 ZI-data=2660  
+".\Objects\lab8.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 

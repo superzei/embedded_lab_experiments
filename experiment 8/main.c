@@ -82,7 +82,7 @@ void set(int val)
 		old_val += inc;
 		PWM1_3_CMPA_R = old_val;
 		
-		delay(1);
+		delay(10);
 	}
 
 }
@@ -130,7 +130,7 @@ int main()
 	
 	sprintf(txbuffer, "AT+CWSAP=\"%s\",\"%s\",%d,%d", "honorlessman", "1234567890", 5, 3);
 	ATcommand(txbuffer, 2000, "OK");
-	ATcommand("AT+CIPMUX=0", 500, "OK");	// set SINGLE connection mode
+	ATcommand("AT+CIPMUX=0", 500, "OK");	// set MULTI connection mode
 	ATcommand("AT+CIFSR", 500, "OK");	// get server IP
 
 	// PWM_Loop();
@@ -145,7 +145,8 @@ int main()
 		delay(30);
 	}*/
 	
-	
+	int i_value;
+	char *raw_val;
 	// SERVER LOOP
 	while(1)
 	{	
@@ -154,17 +155,14 @@ int main()
 			 int start_index = SearchIndexOf(received, "data=");
 				if (start_index != -1) // received response
 				{
-					int value;
 					char* start_point = received + start_index + 5;
-					char *ra_val = strtok(start_point, ";");
-					value = strtol(ra_val, NULL, 10);
+					i_value = strtol(start_point, NULL, 10);
+					// (i_value);
+					PWM1_3_CMPA_R = i_value;
 				}
 			}
-			ATcommand("AT+CIPCLOSE", 1000, "OK");	// disconnect
 		}
-		delay(100);
-		// set(x);
-		delay(100);
+		delay(50);
 	
 	// WaitForInterrupt();	// AHAHAHAHAHAHAHAHAHAHAHAHAHAHA
 }
