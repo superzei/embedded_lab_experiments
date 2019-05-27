@@ -151,18 +151,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>301</LineNumber>
+          <LineNumber>134</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>626</Address>
+          <Address>3384</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\startup.s</Filename>
+          <Filename>.\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\lab8\startup.s\301</Expression>
+          <Expression>\\lab8\main.c\134</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
@@ -183,8 +183,24 @@
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>116</LineNumber>
+          <LineNumber>301</LineNumber>
           <EnabledFlag>1</EnabledFlag>
+          <Address>626</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\startup.s</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\lab8\startup.s\301</Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>116</LineNumber>
+          <EnabledFlag>0</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
