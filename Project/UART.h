@@ -1,0 +1,18 @@
+#ifndef UART_H
+#define UART_H
+
+#define SD_UART_PERIPH SYSCTL_PERIPH_UART3
+#define SD_UART_BASE UART3_BASE
+#define SD_UART_GPIO_PERIPH SYSCTL_PERIPH_GPIOC
+#define SD_UART_GPIO_BASE GPIO_PORTC_BASE
+#define SD_UART_RX GPIO_PC7_U3TX
+#define SD_UART_TX GPIO_PC6_U3RX
+#define SD_UART_RX_PIN GPIO_PIN_6
+#define SD_UART_TX_PIN GPIO_PIN_7
+#define SD_UART_INT INT_UART3
+
+void Init_UART3(void);
+void Init_UART0(void);
+void UARTPrint(char* message);
+
+#endif
