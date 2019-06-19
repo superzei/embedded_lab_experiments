@@ -1,0 +1,7 @@
+*.uvoptx
+*.uvguix.*
+*/Listings/
+*/Objects/
+*.scvd
+*/rvmdk/
+*.uvopt
